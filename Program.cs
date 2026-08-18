@@ -1,4 +1,7 @@
 
+using Microsoft.EntityFrameworkCore;
+using UserAPI.Data;
+
 namespace UserAPI
 {
     public class Program
@@ -12,6 +15,10 @@ namespace UserAPI
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
+
+            builder.Services.AddDbContext<UserAPIDbContext>(options =>
+            options.UseSqlServer(
+                Environment.GetEnvironmentVariable("USER_DB")));
 
             var app = builder.Build();
 
